@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erin Northcott</title>
+  <meta name="description" content="Erin Northcott — somatic guide and storyteller. A new chapter, beginning at first light." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=338" />
+</head>
+<body class="try-instrument">
+  <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
+  <div class="enter-veil" aria-hidden="true"></div>
+  <!-- Layer 1: the sky (fixed, scroll-interpolated gradient) -->
+  <div class="sky" aria-hidden="true"></div>
+  <!-- Layer 2: the stars (fixed canvas, fades in near the night section) -->
+  <canvas class="stars" aria-hidden="true"></canvas>
+  <!-- Layer 2b: glowing horizon light-band (intensifies into the night) -->
+  <div class="horizon" aria-hidden="true"></div>
+  <!-- Ambient celestial dust across the whole site -->
+  <canvas class="motes" aria-hidden="true"></canvas>
+  <!-- The projector's lamp, following the pointer (cursor.js). Two layers:
+       a warm bloom that reads on the bright sky, a cool one that reads on the
+       dark. Each has to be its own element — a blend mode on a child would be
+       trapped inside the parent's stacking context. -->
+  <div class="lamp lamp--warm" aria-hidden="true"></div>
+  <div class="lamp lamp--cool" aria-hidden="true"></div>
+  <!-- Portal edge vignette -->
+  <div class="vignette" aria-hidden="true"></div>
+  <!-- Warm light leaks drifting at the edges -->
+  <div class="leaks" aria-hidden="true"></div>
+  <!-- Dust specks & hairline scratches on the negative -->
+  <div class="dust" aria-hidden="true"></div>
+  <!-- Faint vertical frame lines, as if the frame were projected onto the page -->
+  <div class="framelines" aria-hidden="true"></div>
+  <!-- Film grain over everything -->
+  <div class="grain" aria-hidden="true"></div>
+  <!-- The projector's own unsteady lamp -->
+  <div class="flicker" aria-hidden="true"></div>
+
+  <!-- Torn-paper filters: turbulence chews the straight edges into fibres -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="torn-edge" x="-8%" y="-30%" width="116%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.09" numOctaves="4" seed="11" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="torn-rule" x="-4%" y="-220%" width="108%" height="540%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.4" numOctaves="3" seed="4" result="n" />
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <!-- Film-edge markings. The printing is ON the film, so it travels with
+       the perforations: ten identical blocks, shifted by exactly one block
+       per cycle, which makes the loop seamless. -->
+  <div class="filmedge filmedge--l" aria-hidden="true">
+    <div class="filmedge__print">
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+      <span class="filmedge__mark">16A &#8594; KODAK 400 &#8226;&#8226; 5</span>
+    </div>
+  </div>
+  <div class="filmedge filmedge--r" aria-hidden="true">
+    <div class="filmedge__print">
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+      <span class="filmedge__mark">56 &#8226;&#8226; KODAK 400 &#8594; 16A</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a class="nav__name" href="#sunrise">Erin Northcott</a>
+    <nav class="nav__links" aria-label="Sections">
+      <!-- Inner pages are built next; links are non-clickable stubs for now -->
+      <a class="nav__link" href="daniel/">Daniel</a>
+      <a class="nav__link" href="inner-ceremonies/">Inner Ceremonies</a>
+      <a class="nav__link" href="podcast/">Podcast</a>
+      <a class="nav__link" href="connect/">Connect</a>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <!-- SUNRISE — you land inside the film: Daniel's own footage, first frame -->
+    <section class="section section--hero" id="sunrise">
+      <div class="hero">
+        <figure class="filmframe reveal">
+          <a class="filmframe__link" data-trailer href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-haspopup="dialog" aria-label="Watch the trailer for Daniel — an HBO Original documentary">
+            <div class="filmframe__img">
+              <!-- data-has-audio flips to "true" the moment the clip carries sound -->
+              <video class="filmframe__vid" data-src="videos/daniel.mp4?v=338" data-has-audio="true" poster="images/daniel.jpg?v=338" loop muted playsinline preload="none" aria-hidden="true"></video>
+            </div>
+            <!-- Key-art label: the film's own line, brushed onto torn tape -->
+            <span class="keyart">
+              <span class="keyart__paper" aria-hidden="true"></span>
+              <span class="keyart__line">When <em>life</em> is your subject</span>
+              <span class="keyart__rule" aria-hidden="true"></span>
+            </span>
+          </a>
+
+          <!-- sound is off until the viewer asks for it; sound.js only reveals
+               this once the clip is known to carry an audio track -->
+          <button class="filmframe__sound" type="button" aria-pressed="false" hidden>
+            <svg class="filmframe__sound-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path class="spk" d="M4 9.5h3.4L12 5.4v13.2L7.4 14.5H4z" />
+              <path class="wave" d="M15.4 9.1a4 4 0 0 1 0 5.8" />
+              <path class="wave wave--far" d="M17.8 6.6a7.4 7.4 0 0 1 0 10.8" />
+              <path class="cross" d="M15.6 9.6l4.8 4.8M20.4 9.6l-4.8 4.8" />
+            </svg>
+            <span class="filmframe__sound-label">Sound off</span>
+          </button>
+
+          <figcaption class="filmframe__cap filmframe__cap--under">
+            <span>Daniel &amp; The Film</span>
+            <span>HBO Original</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- HOOK — archival threshold into the story -->
+    <section class="section section--hook" id="hook">
+      <div class="hook reveal">
+        <!-- "and", not "&", and three periods rather than &hellip;: Baxter Clean has
+             neither an ampersand nor an ellipsis, and both were falling back to Caveat
+             mid-line. Set this way the whole line is one face. -->
+        <p class="hook__hand">Boxes of cassettes and a request...</p>
+        <p class="hook__line">a dying wish that became an <span class="hook__hbo">HBO&nbsp;film</span>.</p>
+        <p class="film__cta"><a class="btn-enter" data-trailer href="https://www.youtube.com/watch?v=04iHR-eZIXY" target="_blank" rel="noopener" aria-haspopup="dialog">Daniel</a></p>
+      </div>
+    </section>
+
+
+
+    <!-- ERIN — the quiet bridge: what carrying the archive turned into -->
+    <section class="section section--erin" id="erin">
+      <div class="erin__grid">
+
+        <figure class="erin__photo reveal">
+          <div class="erin__plate">
+            <img src="images/erin-rose-face.jpg?v=338" alt="Erin Northcott" loading="lazy" decoding="async" width="1228" height="1042" />
+          </div>
+        </figure>
+
+        <div class="erin__text reveal">
+          <p class="eyebrow">Erin &mdash; The Work</p>
+          <h2 class="section__title erin__title">Erin Northcott, Producer</h2>
+          <p class="lede">For eleven years, Erin lived inside her younger brother Daniel&rsquo;s dying wish &mdash; that the footage he filmed across the world, the life he lived without hesitation, his message, and the loss of him should become a film. That long labor of love became a documentary, and that film carried Daniel &mdash; his life and his death &mdash; to HBO, and to millions.</p>
+          <p class="lede">Erin Northcott is a producer, storyteller, coach and hypnotherapist, whose work interconnects where story, body, and transformation meet. During the eleven years of carrying Daniel&rsquo;s archive into an HBO documentary, her work expanded into Inner Ceremonies: a gentle, parts-work and body-led practice for people moving through thresholds of their own.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SUNSET — The Becoming -->
+    <section class="section section--sunset" id="sunset">
+      <!-- a light fall of petals through this reel only -->
+      <canvas class="petals petals--back" aria-hidden="true"></canvas>
+      <div class="becoming__grid">
+        <div class="becoming__text reveal">
+          <p class="eyebrow eyebrow--light">Reel 02 &mdash; The Becoming</p>
+          <h2 class="section__title section__title--light">Inner Ceremonies</h2>
+          <p class="lede lede--light">Inner Ceremonies can be described as meditative somatic sessions for people moving through a threshold of their own &mdash; with a craving to connect with a higher part of themselves and to deepen inner stability and connection. Often there is a catalyst that sparks the desire to do this work: a life change, a realization of a pattern, a desire not yet dared upon. An ending, a change the body hasn&rsquo;t caught up with yet.</p>
+          <p class="lede lede--light">Sessions are one to one, body-led and unhurried. You don&rsquo;t need to arrive with words.</p>
+          <p class="becoming__line">See in one session what&rsquo;s been running for a lifetime.</p>
+          <p class="ceremony__cta"><a class="btn-enter" href="inner-ceremonies/">Learn more</a></p>
+        </div>
+        <figure class="becoming__media reveal">
+          <div class="becoming__film">
+            <video data-src="videos/rose-unfurling.mp4" poster="images/rose-poster.jpg" loop muted playsinline preload="none" aria-hidden="true"></video>
+            <span class="becoming__grain8" aria-hidden="true"></span>
+            <span class="becoming__vignette" aria-hidden="true"></span>
+          </div>
+        </figure>
+      </div>
+      <canvas class="petals petals--front" aria-hidden="true"></canvas>
+    </section>
+
+    <!-- COLLABORATE — the invitation, before the night closes in -->
+    <section class="section section--collab" id="collaborate">
+      <div class="measure reveal collab__inner">
+        <p class="eyebrow eyebrow--light">Reel 03 &mdash; Collaborate</p>
+        <h2 class="section__title section__title--light">Have a creative idea?</h2>
+        <!-- TODO: point at the Collaborate page / contact form once it's built -->
+        <a class="btn-enter" href="connect/">Let&rsquo;s connect</a>
+      </div>
+    </section>
+
+    <!-- NIGHT SKY — the stars arrive -->
+    <section class="section section--night" id="night">
+      <div class="measure reveal night__inner">
+        <p class="eyebrow eyebrow--light">Reel 04 &mdash; Night Sky</p>
+      </div>
+
+      <!-- CLOSING — Daniel's own words, the last thing you read.
+           letters.js retypes this from textContent, so markup inside the
+           blockquote would be flattened; the line carries its own emphasis. -->
+      <figure class="pullquote pullquote--close reveal">
+        <span class="ripple" aria-hidden="true"><i></i><i></i><i></i></span>
+        <blockquote>&ldquo;Our story Never ends&rdquo;</blockquote>
+        <figcaption class="pullquote__hand">&mdash; Daniel Northcott to Erin Northcott</figcaption>
+      </figure>
+    </section>
+
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+
+      <!-- left: who she is, and where to find her -->
+      <div class="footer__brand reveal">
+        <p class="footer__name">Erin Northcott</p>
+        <p class="footer__bio">Producer, Coach, mother</p>
+
+      </div>
+
+      <!-- right: the pages -->
+      <nav class="footer__col reveal" aria-label="Explore">
+        <p class="footer__h">Explore</p>
+        <a class="footer__link" href="./">Home</a>
+        <a class="footer__link" href="daniel/">Daniel</a>
+        <a class="footer__link" href="inner-ceremonies/">Inner Ceremonies</a>
+      </nav>
+      <nav class="footer__col reveal" aria-label="More">
+        <p class="footer__h">More</p>
+        <a class="footer__link" href="podcast/">Podcast<span class="footer__soon">Coming soon</span></a>
+        <a class="footer__link" href="connect/">Connect</a>
+      </nav>
+
+    </div>
+
+    <div class="footer__base reveal">
+      <span>&copy; 2026 Erin Northcott</span>
+      <a class="footer__badge footer__credit" href="https://natalielisa.com" target="_blank" rel="noopener">Site designed and built by Natalie Moore</a>
+      <span class="footer__code">Reel end &middot; 16A</span>
+    </div>
+  </footer>
+
+  <!-- Daniel in the starfield — the page ends inside him, behind the closing
+       quote and the footer alike -->
+  <div class="endsky" aria-hidden="true">
+    <!-- The fade at the top is the WebP's alpha channel, not CSS. The ramp is
+         HERS, recovered from starskissingme2.2.jpg (2026-10-04) — see the
+         .endsky note in style.css. The fallback stays the untouched .jpg: it
+         carries no alpha, so on anything too old for WebP alpha this meets
+         the night with a hard edge, as it always did. It is NOT 2.2.jpg,
+         because 2.2's fade is flattened onto white and would show as a pale
+         haze over the night instead of a fade. -->
+    <picture>
+      <source srcset="images/starskissingme2.2-fade.webp?v=338" type="image/webp" />
+      <img src="images/starskissingme2.jpg?v=338" alt="" loading="lazy" decoding="async" />
+    </picture>
+  </div>
+
+  <!-- The trailer plays here, not on YouTube. trailer.js fills the src on open
+       and empties it on close, so the embed loads nothing until it is asked
+       for and stops dead when dismissed. -->
+  <dialog class="trailer" id="trailer" aria-label="Daniel — official trailer">
+    <div class="trailer__frame">
+      <div class="trailer__gate">
+        <iframe class="trailer__vid" title="Daniel — official trailer"
+                data-embed="https://www.youtube-nocookie.com/embed/04iHR-eZIXY?rel=0&amp;modestbranding=1&amp;playsinline=1&amp;autoplay=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+      </div>
+      <p class="trailer__cap">
+        <span>Daniel &middot; Official trailer</span>
+        <a class="trailer__out" href="https://www.crave.ca/en/special/daniel-55294" target="_blank" rel="noopener">Watch on Crave</a>
+      </p>
+    </div>
+    <button class="trailer__close" type="button" autofocus aria-label="Close the trailer">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </dialog>
+
+  <script src="sky-flow.js?v=1" defer></script>
+  <script src="stars.js" defer></script>
+  <script src="motes.js?v=338" defer></script>
+  <script src="cursor.js?v=338" defer></script>
+  <script src="letters.js?v=338" defer></script>
+  <script src="sound.js?v=338" defer></script>
+  <script src="petals.js?v=338" defer></script>
+  <script src="reveal.js?v=338" defer></script>
+  <script src="glint.js?v=338" defer></script>
+  <script src="trailer.js?v=338" defer></script>
+</body>
+</html>

@@ -7764,3 +7764,15 @@ body.is-ceremony .story .story__role { display: inline-block; margin: .2rem 0 0;
 /* "no wite background": the FAQ rows grow a white card on hover and while
    open. This row never does. */
 body.is-ceremony .story .faq__item::before { content: none; }
+
+/* 2026-10-23, "both of these are by erin, so her credit should be on the
+   bottom small": the quotes card carried a credit under the first quote and
+   none under the second. One credit now, at the foot of the card, centred
+   and a size down from the in-line one it replaces. */
+body.is-ceremony .temple__meets--quotes .temple__cite--card {
+  margin: clamp(1.6rem, 3.4vh, 2.6rem) 0 0;
+  text-align: center;
+  font-size: .8rem;
+  letter-spacing: .04em;
+  color: var(--t-ink-soft);
+}
