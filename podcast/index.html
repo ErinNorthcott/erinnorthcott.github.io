@@ -2,114 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book &mdash; Erin Northcott</title>
-  <meta name="description" content="Erin Northcott's book is coming soon." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@300;400;500&family=Caveat:wght@500;600;700&family=Karla:wght@300..700&family=Permanent+Marker&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css?v=367" />
+  <meta http-equiv="refresh" content="0; url=https://erinnorthcott.com/book/" />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://erinnorthcott.com/book/" />
+  <title>Moved to /book/ &mdash; Erin Northcott</title>
+  <style>
+    body { font-family: system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+           background: #faf3ee; color: #3d332b; display: grid; place-items: center;
+           min-height: 100vh; margin: 0; text-align: center; padding: 2rem; }
+    a { color: inherit; }
+  </style>
 </head>
-<body class="try-instrument is-connect is-podcast">
-  <!-- Arrival: a luminous veil that dissolves on load — you cross a threshold -->
-  <div class="enter-veil" aria-hidden="true"></div>
-  <!-- Layer 1: the sky (fixed, scroll-interpolated gradient) -->
-  <div class="sky" aria-hidden="true"></div>
-  <!-- Layer 2: the stars (fixed canvas, fades in near the night section) -->
-  <canvas class="stars" aria-hidden="true"></canvas>
-  <!-- Layer 2b: glowing horizon light-band (intensifies into the night) -->
-  <div class="horizon" aria-hidden="true"></div>
-  <!-- Ambient celestial dust across the whole site -->
-  <canvas class="motes" aria-hidden="true"></canvas>
-  <!-- The projector's lamp, following the pointer (cursor.js). Two layers:
-       a warm bloom that reads on the bright sky, a cool one that reads on the
-       dark. Each has to be its own element — a blend mode on a child would be
-       trapped inside the parent's stacking context. -->
-  <div class="lamp lamp--warm" aria-hidden="true"></div>
-  <div class="lamp lamp--cool" aria-hidden="true"></div>
-  <!-- Portal edge vignette -->
-  <div class="vignette" aria-hidden="true"></div>
-  <!-- Warm light leaks drifting at the edges -->
-  <div class="leaks" aria-hidden="true"></div>
-  <!-- Dust specks & hairline scratches on the negative -->
-  <div class="dust" aria-hidden="true"></div>
-  <!-- Faint vertical frame lines, as if the frame were projected onto the page -->
-  <div class="framelines" aria-hidden="true"></div>
-  <!-- Film grain over everything -->
-  <div class="grain" aria-hidden="true"></div>
-  <!-- The projector's own unsteady lamp -->
-  <div class="flicker" aria-hidden="true"></div>
-
-  <!-- Torn-paper filters: turbulence chews the straight edges into fibres -->
-  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="torn-edge" x="-8%" y="-30%" width="116%" height="160%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.014 0.09" numOctaves="4" seed="11" result="n" />
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-    <filter id="torn-rule" x="-4%" y="-220%" width="108%" height="540%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.03 0.4" numOctaves="3" seed="4" result="n" />
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-  </svg>
-
-  <!-- Navigation -->
-  <header class="nav">
-    <a class="nav__name" href="../">Erin Northcott</a>
-    <nav class="nav__links" aria-label="Sections">
-      <!-- Inner pages are built next; links are non-clickable stubs for now -->
-      <a class="nav__link" href="../daniel/">Daniel</a>
-      <a class="nav__link" href="../inner-ceremonies/">Inner Ceremonies</a>
-      <a class="nav__link nav__link--here" href="./" aria-current="page">Book</a>
-      <a class="nav__link" href="../connect/">Connect</a>
-    </nav>
-  </header>
-
-  <main class="page">
-
-    <section class="section section--connect section--podcast" id="podcast">
-      <div class="podcast__inner reveal">
-        <p class="eyebrow">The book</p>
-        <h1 class="section__title podcast__title">Coming soon..</h1>
-      </div>
-    </section>
-
-  </main>
-
-<footer class="footer" id="footer">
-    <div class="footer__inner">
-
-      <!-- left: who she is, and where to find her -->
-      <div class="footer__brand reveal">
-        <p class="footer__name">Erin Northcott</p>
-        <p class="footer__bio">Producer, Coach, mother</p>
-
-      </div>
-
-      <!-- right: the pages -->
-      <nav class="footer__col reveal" aria-label="Explore">
-        <p class="footer__h">Explore</p>
-        <a class="footer__link" href="../">Home</a>
-        <a class="footer__link" href="../daniel/">Daniel</a>
-        <a class="footer__link" href="../inner-ceremonies/">Inner Ceremonies</a>
-      </nav>
-      <nav class="footer__col reveal" aria-label="More">
-        <p class="footer__h">More</p>
-        <a class="footer__link" href="./">Book<span class="footer__soon">Coming soon</span></a>
-        <a class="footer__link" href="../connect/">Connect</a>
-      </nav>
-
-    </div>
-
-    <div class="footer__base reveal">
-      <span>&copy; 2026 Erin Northcott</span>
-      <a class="footer__badge footer__credit" href="https://natalielisa.com" target="_blank" rel="noopener">Site designed and built by Natalie Moore</a>
-      <span class="footer__code">Reel end &middot; 16A</span>
-    </div>
-  </footer>
-
-  <script src="../motes.js?v=367" defer></script>
-  <script src="../cursor.js?v=367" defer></script>
-  <script src="../reveal.js?v=367" defer></script>
-  <script src="../glint.js?v=367" defer></script>
+<body>
+  <p>This page has moved to <a href="https://erinnorthcott.com/book/">erinnorthcott.com/book/</a>.</p>
+  <script>location.replace('https://erinnorthcott.com/book/');</script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+# erinnorthcott.com — everything here is public and may be indexed.
+
+User-agent: *
+Allow: /
+
+# Answer engines and AI crawlers, named explicitly so there is no ambiguity.
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://erinnorthcott.com/sitemap.xml
