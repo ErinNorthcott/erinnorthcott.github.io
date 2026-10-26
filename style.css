@@ -7703,7 +7703,18 @@ body.is-ceremony .temple__band--story {
   padding-block: clamp(1.4rem, 3vh, 2.4rem) clamp(3rem, 7vh, 4.5rem);
 }
 body.is-ceremony .temple__band--story .temple__label { margin-bottom: 0; }
-body.is-ceremony .story { width: min(100% - 3rem, 760px); margin: clamp(1.6rem, 3.4vh, 2.6rem) auto 0; }
+/* 2026-10-26, "this section should have a white block behind it to match the
+   other testimonials": the same surface, radius and warm shadow as
+   .praise__card, which supersedes the "no wite background" of 10-23. */
+body.is-ceremony .story {
+  width: min(100% - 3rem, 1040px);
+  text-align: center;                 /* 2026-10-26, "wider, and the text centered" */
+  margin: clamp(1.6rem, 3.4vh, 2.6rem) auto 0;
+  padding: clamp(2rem, 3.6vw, 3.2rem) clamp(1.8rem, 3.4vw, 3rem);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 20px 50px -34px rgba(150, 92, 72, .35);
+}
 
 /* the pulled line, in the same display italic as her other pull quotes */
 body.is-ceremony .story__lead {
@@ -7782,6 +7793,14 @@ body.is-ceremony .story__rest p {
 body.is-ceremony .story.is-open .story__rest p { opacity: 1; transform: none; }
 body.is-ceremony .story__rest p:first-child { padding-top: clamp(1.6rem, 3.4vw, 2.4rem); }
 body.is-ceremony .story__rest p:last-child { margin-bottom: 0; }
+
+/* the lead, the credit and the toggle all sit on the centre line. The story
+   itself stays ragged-left once open: six centred paragraphs are a hard read.
+   The block is centred within the card instead. */
+body.is-ceremony .story__lead { margin-inline: auto; max-width: none; }   /* 2026-10-26: fills the card */
+body.is-ceremony .story__rest > div { text-align: left; }
+body.is-ceremony .story__rest p { margin-inline: auto; max-width: 80ch; }
+
 
 @media (prefers-reduced-motion: reduce) {
   body.is-ceremony .story__rest,
