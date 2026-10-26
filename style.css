@@ -7834,3 +7834,47 @@ body.is-daniel .dan__h1 {
   max-width: 18ch;
 }
 @media (max-width: 760px) { body.is-daniel .dan__h1 { max-width: none; } }
+
+/* ==========================================================================
+   THE BECOMING, STACKED (2026-10-26). "on mobile, i want the title of inner
+   ceremonies, then the rose then the copy."
+
+   The title lives inside .becoming__text, so the only way to lift the rose
+   between it and the copy without touching the markup is to let that block
+   dissolve into the grid: display: contents makes its children siblings of
+   the figure, and order does the rest.
+
+   Two consequences, both handled here: the column becomes a flex stack so
+   the grid's 2rem gap does not land between every paragraph, and the title
+   loses the container it sized against, so its 22cqi is restated in vw.
+   ========================================================================== */
+@media (max-width: 820px) {
+  .becoming__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .becoming__text { display: contents; }
+
+  .becoming__text > .eyebrow { order: 1; }
+  .becoming__text > .section__title {
+    order: 2;
+    font-size: clamp(2.2rem, 13vw, 4rem);   /* was 22cqi off its own column */
+    margin-bottom: 0;
+  }
+  .becoming__media {
+    order: 3;
+    max-width: 20rem;
+    margin: clamp(1.4rem, 5vw, 2rem) auto clamp(1.6rem, 6vw, 2.4rem);
+  }
+  .becoming__text > .lede { order: 4; }
+  .becoming__text > .becoming__line { order: 5; }
+  .becoming__text > .ceremony__cta { order: 6; }
+}
+
+/* 2026-10-26, "erin northcott bio should be left justified too": the Your
+   Guide words come off the centre line. The portrait above them stays
+   centred, and the block keeps its own measure. */
+body.is-ceremony .temple__band--guide .temple__guidetext { text-align: left; }
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__label,
+body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { justify-content: flex-start; }
