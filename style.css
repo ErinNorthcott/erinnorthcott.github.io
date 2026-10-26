@@ -726,7 +726,10 @@ body {
   white-space: nowrap;
   font-size: clamp(2.6rem, 22cqi, 6rem);   /* the line is ~4.2em wide, so 22cqi always fits */
 }
-.becoming__text .lede { font-size: clamp(.9rem, 1.1vw, 1.02rem); }
+.becoming__text .lede { font-size: clamp(0.98rem, 1.2vw, 1.14rem); }   /* 2026-10-26,
+   "why is the font size different from inner ceremnie and her bio? keep it
+   consistent": this had been a size down from every other paragraph on the
+   site since 2026-09-09. It now matches .lede exactly. */
 
 /* Pill buttons (DANIEL, ENTER) — outlined in rose, filling pink on hover */
 .btn-enter {
@@ -7888,14 +7891,12 @@ body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { just
 
 /* 2026-10-26, "the title of inner ceremonies needs to be left justified too".
    Stated outright rather than left to inherit through the display: contents
-   block, and the size is restated at a weight that beats the try-instrument
-   rule, so the nowrap line fits a phone instead of running past its edge. */
+   block. The size is deliberately NOT touched here: it matches .erin__title
+   and must stay that way. */
 @media (max-width: 820px) {
   .becoming__grid,
   .becoming__text,
   .becoming__text > * { text-align: left; }
-  body.try-instrument .becoming__text > .section__title,
-  .becoming__text > .section__title { font-size: clamp(2.1rem, 11.5vw, 3.4rem); }
 }
 
 /* 2026-10-26, "there is too much space after 'have a creative idea' and reel
@@ -7907,4 +7908,17 @@ body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { just
     min-height: 68vh;
     padding-top: clamp(2.5rem, 7vh, 4rem);
   }
+}
+
+/* 2026-10-26, "i asked for the paragraph to be left justified with the last
+   line aligned left": justified, not left-aligned, which is what the earlier
+   text-align: left gave her. The last line stays flush left so the paragraph
+   never ends on a stretched row. */
+.erin__text .lede {
+  text-align: justify;
+  text-align-last: left;
+}
+@media (max-width: 820px) {
+  .erin__grid { text-align: left; }        /* the title and the rest */
+  .erin__text .lede { text-align: justify; text-align-last: left; }
 }
