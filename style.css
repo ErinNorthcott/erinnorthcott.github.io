@@ -7885,3 +7885,26 @@ body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { just
 @media (max-width: 820px) {
   .erin__grid { text-align: left; }
 }
+
+/* 2026-10-26, "the title of inner ceremonies needs to be left justified too".
+   Stated outright rather than left to inherit through the display: contents
+   block, and the size is restated at a weight that beats the try-instrument
+   rule, so the nowrap line fits a phone instead of running past its edge. */
+@media (max-width: 820px) {
+  .becoming__grid,
+  .becoming__text,
+  .becoming__text > * { text-align: left; }
+  body.try-instrument .becoming__text > .section__title,
+  .becoming__text > .section__title { font-size: clamp(2.1rem, 11.5vw, 3.4rem); }
+}
+
+/* 2026-10-26, "there is too much space after 'have a creative idea' and reel
+   4, shorten that". The night reel holds a full viewport and pins its words
+   to the foot, so most of that gap was its empty head, not the padding. */
+@media (max-width: 820px) {
+  .section--collab { padding-bottom: clamp(2.2rem, 6vh, 3.4rem); }
+  .section--night {
+    min-height: 68vh;
+    padding-top: clamp(2.5rem, 7vh, 4rem);
+  }
+}
