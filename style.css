@@ -7856,14 +7856,14 @@ body.is-daniel .dan__h1 {
   }
   .becoming__text { display: contents; }
 
-  .becoming__text > .eyebrow { order: 1; }
+  .becoming__media { order: 1; }
+  .becoming__text > .eyebrow { order: 2; }
   .becoming__text > .section__title {
-    order: 2;
+    order: 3;
     font-size: clamp(2.2rem, 13vw, 4rem);   /* was 22cqi off its own column */
     margin-bottom: 0;
   }
   .becoming__media {
-    order: 3;
     max-width: 20rem;
     margin: clamp(1.4rem, 5vw, 2rem) auto clamp(1.6rem, 6vw, 2.4rem);
   }
@@ -7878,3 +7878,10 @@ body.is-daniel .dan__h1 {
 body.is-ceremony .temple__band--guide .temple__guidetext { text-align: left; }
 body.is-ceremony .temple__band--guide .temple__guidetext .temple__label,
 body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { justify-content: flex-start; }
+
+/* 2026-10-26, "i want erin's bio and title to be left justified": the
+   homepage Erin block centred itself when it stacked. It no longer does.
+   The photo above it stays centred in its own column. */
+@media (max-width: 820px) {
+  .erin__grid { text-align: left; }
+}
