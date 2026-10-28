@@ -7881,8 +7881,12 @@ body.is-daniel .dan__h1 {
     font-size: clamp(2.2rem, 13vw, 4rem);   /* was 22cqi off its own column */
     margin-bottom: 0;
   }
+  /* 2026-10-28, "make the inner ceremonies rose the same size as erins
+     photo": it was capped at 20rem, 320px against the 343px column, so it
+     read as inset while the photo above it ran edge to edge. It now takes
+     the column, same as .erin__photo. */
   .becoming__media {
-    max-width: 20rem;
+    max-width: 100%;
     margin: clamp(1.4rem, 5vw, 2rem) auto clamp(1.6rem, 6vw, 2.4rem);
   }
   .becoming__text > .lede { order: 4; }
@@ -7912,6 +7916,18 @@ body.is-ceremony .temple__band--guide .temple__guidetext .temple__eyebrow { just
   .becoming__grid,
   .becoming__text,
   .becoming__text > * { text-align: left; }
+}
+
+/* 2026-10-28, "make the inner ceremonies title left justified". text-align
+   was already left and had been since 10-26 — the title was not centred TEXT,
+   it was a centred BOX. .becoming__grid carries align-items: center, and in
+   the stacked flex column that shrinks each child to its content and centres
+   it, so the title sat 272px wide at x=59 while the paragraphs below ran the
+   full 343. Stretching the box is what moves the words, not another
+   text-align. Scoped to the title alone: the eyebrow and the button are
+   centred by the same rule and she has not asked for those. */
+@media (max-width: 820px) {
+  .becoming__text > .section__title { align-self: stretch; }
 }
 
 /* 2026-10-26, "there is too much space after 'have a creative idea' and reel
@@ -8117,4 +8133,44 @@ body.is-ceremony .fit .faq__item {
 }
 @media (max-width: 820px) {
   body.is-ceremony .fit { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ==========================================================================
+   INNER CEREMONIES ON MOBILE (2026-10-28), two asks.
+   ========================================================================== */
+
+/* 1. "the section 'thresholds' the paragraph text isn't wide enough, have it
+   match all of the width of the text - for example, 'the work' section
+   paragraph is the right width".
+
+   The 860px rule that collapses .temple__cols to one track was never
+   reaching this band. `body.is-ceremony .temple__cols` is three selectors;
+   `body.is-ceremony .temple__band--thresholds .temple__cols` is four, and
+   specificity beats a media query, so Thresholds kept its two-column grid on
+   a phone: the words took 262px at x=40 while the spiral held the rest. The
+   Work, which has no such override, measured 342px at x=24. Restated at the
+   band's own specificity, Thresholds now matches it. */
+@media (max-width: 860px) {
+  body.is-ceremony .temple__band--thresholds .temple__cols {
+    grid-template-columns: 1fr;
+    gap: clamp(1.6rem, 5vw, 2.4rem);
+  }
+  /* the same trap one level up: `.temple__band--thresholds .temple__wrap`
+     pins the band to `100% - 5rem` for its wide desktop spread, and outranks
+     the 860px `.temple__wrap` rule that takes every other band to
+     `100% - 3rem`. That is the last 32px: 310 against The Work's 342. */
+  body.is-ceremony .temple__band--thresholds .temple__wrap { width: min(100% - 3rem, 1240px); }
+}
+
+/* 2. "then i want you to make all of the titles left justified". Every
+   section kicker and heading on the page, the hero included. The labels are
+   flex rows (the hairline sits beside the word), so they need
+   justify-content as well as text-align — text-align alone moves nothing. */
+@media (max-width: 820px) {
+  body.is-ceremony .temple__title,
+  body.is-ceremony .temple__label,
+  body.is-ceremony .temple__label--centre,
+  body.is-ceremony .temple__eyebrow { text-align: left; }
+  body.is-ceremony .temple__label,
+  body.is-ceremony .temple__label--centre { justify-content: flex-start; }
 }
