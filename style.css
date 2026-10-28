@@ -7142,9 +7142,16 @@ body.is-ceremony .consult__head {
   color: var(--t-ink);
 }
 body.is-ceremony .consult__price { color: var(--gold); white-space: nowrap; }
+/* THE MEASURE IS THE PAGE'S OWN, NOT A CH COUNT (2026-10-28). It was
+   `min(100%, 68ch)` on both, and `ch` is relative to each element's own
+   font-size, so the .95rem refund came out 592px against the 1rem text's
+   623px: two paragraphs in one card with left edges 16px apart, both of
+   them narrower than the lede directly above. They now share `47rem`,
+   which is `--t-measure`'s own cap, so the card's words line up with the
+   band's and the justified lines stop stretching. */
 body.is-ceremony .consult__refund,
 body.is-ceremony .consult__text {
-  width: min(100%, 68ch);
+  width: min(100%, 47rem);
   margin: 0 auto;
   font-family: var(--body);
   line-height: 1.65;
