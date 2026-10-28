@@ -7087,7 +7087,12 @@ body.is-daniel .dan__chquote figcaption {
 body.is-daniel .dan__chquote-note { font-style: italic; opacity: .82; }
 /* the warm paper chapters carry the deeper gold instead of the night yellow */
 body.is-daniel .dan__sec--paper .dan__chquote { border-top-color: var(--pg-rule); }
-body.is-daniel .dan__sec--paper .dan__chquote blockquote { color: var(--pg-sub); }
+/* 2026-10-28, "make this text black, i can't see it": the lyric was --pg-sub,
+   the deeper gold, which is 2.5:1 against the #f3e8d9 paper — it reads on the
+   night cards, not on this one. It takes the paper's own ink instead, the same
+   colour as the prose above it, at 13:1. Chapter Seven is a NIGHT card and its
+   quote stays the bright yellow; this selector cannot reach it. */
+body.is-daniel .dan__sec--paper .dan__chquote blockquote { color: var(--pg-ink); }
 body.is-daniel .dan__sec--paper .dan__chquote figcaption {
   color: color-mix(in srgb, var(--pg-ink) 68%, transparent);
 }
@@ -7840,10 +7845,13 @@ body.is-daniel .dan__h1 {
   white-space: normal;                /* the old two-word title never wrapped */
   font-size: clamp(1.9rem, 3.6vw, 3rem);
   line-height: 1.15;
-  text-wrap: balance;
-  max-width: 18ch;
+  /* 2026-10-28: it was capped at 18ch with `balance`, which held it to 450px
+     inside a 1320px head and then evened the overflow into three short lines:
+     "why are you clumping the text together in lines like this". The cap is
+     gone, so it takes the head's own width and sets on ONE line from 1400up,
+     and `pretty` fills each line rather than balancing them. */
+  text-wrap: pretty;
 }
-@media (max-width: 760px) { body.is-daniel .dan__h1 { max-width: none; } }
 
 /* ==========================================================================
    THE BECOMING, STACKED (2026-10-26). "on mobile, i want the title of inner
