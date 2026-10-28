@@ -1,9 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Erin Northcott">
   <!-- FAVICON (2026-10-28, hers): "a favicon for erins site. a pink circle",
-       then "can we try a rose?", then "i want it to be pink too" / "and simple".
+       then "can we try a rose?", "i want it to be pink too", "and simple", then
+       "i want the spiral to be a bit bigger, right now its small, use the full
+       width of the square".
+
        A rose read down to 16px is a spiral and nothing else: her own gold
-       line-art rose (images/rose-line-gold.png) was tried first and is mush at
-       32px, a smudge at 16. Six variants were previewed at 16/32/64/180 and she
-       took C: the spiral alone, no disc, in the site pink. -->
-  <path d="M52.00 32.00 L51.69 34.37 L51.10 36.67 L50.25 38.87 L49.15 40.93 L47.82 42.82 L46.28 44.53 L44.57 46.02 L42.70 47.29 L40.72 48.31 L38.64 49.08 L36.51 49.59 L34.35 49.84 L32.19 49.82 L30.08 49.55 L28.03 49.03 L26.07 48.28 L24.24 47.30 L22.56 46.12 L21.05 44.76 L19.72 43.25 L18.60 41.60 L17.69 39.85 L17.01 38.01 L16.56 36.13 L16.34 34.23 L16.35 32.34 L16.59 30.48 L17.05 28.68 L17.71 26.97 L18.57 25.37 L19.60 23.90 L20.78 22.58 L22.11 21.43 L23.54 20.46 L25.07 19.67 L26.66 19.09 L28.29 18.70 L29.93 18.52 L31.56 18.53 L33.16 18.74 L34.71 19.14 L36.17 19.72 L37.54 20.46 L38.79 21.34 L39.91 22.36 L40.89 23.50 L41.71 24.72 L42.37 26.02 L42.85 27.37 L43.17 28.75 L43.31 30.14 L43.29 31.51 L43.10 32.85 L42.75 34.14 L42.26 35.36 L41.63 36.50 L40.88 37.53 L40.03 38.45 L39.08 39.24 L38.06 39.90 L36.98 40.43 L35.87 40.81 L34.74 41.05 L33.61 41.15 L32.49 41.11 L31.41 40.94 L30.37 40.64 L29.40 40.22 L28.51 39.70 L27.70 39.08 L26.98 38.38 L26.37 37.62 L25.87 36.80 L25.49 35.95 L25.21 35.07 L25.05 34.19 L25.01 33.31 L25.07 32.45 L25.23 31.63 L25.49 30.85 L25.83 30.12 L26.26 29.47 L26.74 28.88 L27.29 28.38 L27.87 27.96 L28.49 27.62 L29.13 27.38 L29.77 27.22 L30.42 27.15 L31.04 27.15 L31.64 27.24 L32.20 27.40 L32.73 27.62 L33.20 27.90 L33.61 28.23 L33.97 28.59 L34.26 28.99 L34.49 29.40 L34.66 29.82 L34.76 30.25 L34.80 30.66 L34.78 31.06 L34.71 31.43 L34.59 31.78 L34.43 32.08 L34.24 32.35 L34.02 32.57 L33.78 32.74 L33.53 32.86" fill="none" stroke="#f3b0c4" stroke-width="6" stroke-linecap="round"/>
+       line-art rose was tried first and does not survive the size. Six
+       variants were previewed at 16/32/64/180 and she took the spiral alone,
+       on no disc, in the site pink.
+
+       An inward spiral is NOT symmetric about its own centre: it starts at
+       angle 0 at full radius and winds in, so the raw path sat 3px down and
+       right of the middle. These coordinates are the path measured, centred on
+       its own painted bounding box (stroke included) and scaled so the long
+       axis touches both edges. Do not "simplify" this back to a centred arc
+       formula; it will drift off-centre again. -->
+  <path d="M60.67 28.50 L60.17 32.32 L59.23 36.02 L57.86 39.54 L56.08 42.85 L53.94 45.90 L51.48 48.64 L48.72 51.05 L45.72 53.08 L42.53 54.73 L39.19 55.97 L35.76 56.79 L32.28 57.19 L28.82 57.16 L25.41 56.73 L22.12 55.89 L18.98 54.67 L16.03 53.11 L13.33 51.21 L10.89 49.03 L8.76 46.59 L6.96 43.94 L5.50 41.12 L4.40 38.17 L3.68 35.15 L3.33 32.09 L3.35 29.04 L3.73 26.05 L4.47 23.16 L5.53 20.41 L6.91 17.84 L8.56 15.48 L10.47 13.35 L12.60 11.50 L14.91 9.93 L17.36 8.67 L19.91 7.73 L22.53 7.11 L25.18 6.81 L27.81 6.84 L30.38 7.18 L32.86 7.82 L35.22 8.75 L37.42 9.93 L39.43 11.36 L41.24 13.00 L42.81 14.82 L44.12 16.79 L45.18 18.88 L45.96 21.05 L46.47 23.27 L46.70 25.50 L46.66 27.71 L46.36 29.87 L45.80 31.95 L45.01 33.91 L44.00 35.73 L42.79 37.39 L41.41 38.87 L39.89 40.14 L38.25 41.21 L36.52 42.05 L34.74 42.67 L32.92 43.06 L31.10 43.21 L29.30 43.15 L27.56 42.87 L25.89 42.39 L24.33 41.72 L22.89 40.88 L21.59 39.89 L20.44 38.76 L19.46 37.53 L18.66 36.22 L18.03 34.85 L17.59 33.44 L17.34 32.01 L17.26 30.60 L17.36 29.22 L17.62 27.90 L18.04 26.64 L18.59 25.48 L19.27 24.43 L20.06 23.49 L20.93 22.67 L21.87 22.00 L22.87 21.46 L23.89 21.06 L24.93 20.81 L25.96 20.69 L26.97 20.71 L27.93 20.85 L28.84 21.10 L29.68 21.46 L30.44 21.91 L31.11 22.43 L31.68 23.02 L32.15 23.65 L32.52 24.32 L32.78 25.00 L32.94 25.68 L33.00 26.35 L32.97 26.99 L32.86 27.59 L32.67 28.14 L32.41 28.63 L32.10 29.05 L31.75 29.41 L31.37 29.69 L30.97 29.89" fill="none" stroke="#f3b0c4" stroke-width="6.65" stroke-linecap="round"/>
 </svg>
