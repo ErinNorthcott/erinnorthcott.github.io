@@ -8162,15 +8162,39 @@ body.is-ceremony .fit .faq__item {
   body.is-ceremony .temple__band--thresholds .temple__wrap { width: min(100% - 3rem, 1240px); }
 }
 
-/* 2. "then i want you to make all of the titles left justified". Every
-   section kicker and heading on the page, the hero included. The labels are
-   flex rows (the hairline sits beside the word), so they need
-   justify-content as well as text-align — text-align alone moves nothing. */
+/* 2. "then i want you to make all of the titles left justified", and then
+   "the journey and three pillars - left justified" when they had not moved.
+
+   BOTH the kickers and the headings are FLEX ROWS, not blocks — the hairline
+   rule is a ::before beside the word. text-align does nothing to a flex
+   container; justify-content is the only thing that moves them, and the
+   first pass set it on `.temple__label` alone at two selectors. What
+   actually centres them is `.temple__centre .temple__label` and
+   `.temple__centre .temple__eyebrow` at THREE, on the wrapper, so the first
+   pass lost on specificity and every heading stayed centred while reporting
+   `text-align: left`. Matched here at the wrapper's own specificity.
+
+   The ::before hairlines stay suppressed exactly as they were: this moves
+   the rows, it does not re-decorate them. */
 @media (max-width: 820px) {
   body.is-ceremony .temple__title,
   body.is-ceremony .temple__label,
-  body.is-ceremony .temple__label--centre,
   body.is-ceremony .temple__eyebrow { text-align: left; }
   body.is-ceremony .temple__label,
-  body.is-ceremony .temple__label--centre { justify-content: flex-start; }
+  body.is-ceremony .temple__label--centre,
+  body.is-ceremony .temple__eyebrow,
+  body.is-ceremony .temple__centre .temple__label,
+  body.is-ceremony .temple__centre .temple__eyebrow { justify-content: flex-start; }
+}
+
+/* 2026-10-28, "the journey and three pillars - left justified" on mobile.
+   A third of the same trap. text-align was already left: the heading block
+   was INSET. `.temple__band--pillars .temple__measure` sets its own
+   `--t-measure: min(100% - 6rem, 50rem)` for the band's wider desktop
+   spread, and that element rule beats the token on body, so on a phone the
+   kicker and heading sat 294px at x=48 while the three pillar cards
+   directly beneath them ran 342 at x=24: the title indented from its own
+   cards by 24px. It takes the page measure below 820px. */
+@media (max-width: 820px) {
+  body.is-ceremony .temple__band--pillars .temple__measure { --t-measure: min(100% - 3rem, 47rem); }
 }
