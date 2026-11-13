@@ -718,7 +718,7 @@ body {
   gap: clamp(1.75rem, 4.6vw, 4.25rem);
   align-items: center;
 }
-.becoming__text { max-width: 52ch; text-align: left; }
+.becoming__text { max-width: 60ch; text-align: left; }   /* 2026-11-12: matches the grid track */
 .becoming__text .lede + .lede { margin-top: 1.1rem; }
 /* the title holds one line beside the rose; the copy sits a touch smaller (2026-09-09) */
 .becoming__text { container-type: inline-size; }   /* the title sizes off its own column */
@@ -1663,7 +1663,19 @@ body {
   filter: saturate(1.02) brightness(1.02);
 }
 
-.erin__text { max-width: 60ch; }
+/* 2026-11-12, "center erins bio a little". The box was already centred: the
+   photo is calc(100% + 3.5rem) and align-self: center, so it bleeds 28px past
+   the row top and foot evenly. What was not centred was the CONTENT inside
+   the box, which sat at the top of a track stretched to the row, leaving
+   ~100px of empty column under the last line at a 1000px window. Centring
+   the content is the fix; align-items on the grid is not, because the photo
+   depends on the row staying stretched. */
+.erin__text {
+  max-width: 60ch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .erin__text .lede { margin-top: clamp(.9rem, 2vw, 1.35rem); }
 /* the photo column took width off this one, which left the second paragraph
    ending on a lone "own." — text-wrap: pretty pulls a word down to keep the
@@ -1932,14 +1944,25 @@ body.is-connect .footer {
    left in its old slot with dead space beside it. */
 .becoming__media {
   max-width: 500px;
+  /* a grid item's min-width is auto, so the plate's min-content held its
+     track at 500 and the whole deficit came out of the words. This is what
+     lets the minmax above actually bite on a narrower window. */
+  min-width: 0;
   margin: 0;
   padding: 6px;
   background: #c9a84c;
   box-shadow: 0 20px 46px rgba(74,42,20,.26);
 }
+/* 2026-11-12, "make the inner ceremonies a bit wider". Her Nov 10 copy took
+   this block from two paragraphs to five, and at 52ch the column ran 340px
+   at a 1000px window against a 490px rose: the words were the taller half of
+   a band built when they were the shorter one. The measure goes to 60ch and
+   the grid gets the room for it. The rose keeps its 500px wherever that
+   fits; below about 1080px it eases back to 420 rather than take the whole
+   deficit out of the text, which is what squeezed it in the first place. */
 .becoming__grid {
-  max-width: 1040px;
-  grid-template-columns: minmax(0, 52ch) 500px;   /* tracks .becoming__media */
+  max-width: 1160px;
+  grid-template-columns: minmax(0, 60ch) minmax(0, 500px);
   justify-content: center;
   gap: clamp(1.5rem, 3.4vw, 3rem);
 }
