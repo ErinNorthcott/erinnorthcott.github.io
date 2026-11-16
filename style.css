@@ -7870,7 +7870,7 @@ body.is-ceremony .temple__meets--quotes .temple__cite--card {
    SEO PASS (2026-10-25). Two presentational consequences of it, and nothing
    else: the story heading is now the page's <h1> and carries a much longer
    line than "Sibling Love" did, so it is allowed to wrap and set smaller;
-   and nothing else.
+   and the press row under the film buttons.
    ========================================================================== */
 body.is-daniel .dan__h1 {
   white-space: normal;                /* the old two-word title never wrapped */
@@ -7883,6 +7883,34 @@ body.is-daniel .dan__h1 {
      and `pretty` fills each line rather than balancing them. */
   text-wrap: pretty;
 }
+
+/* the press row: the same small quiet link as the rest of the film block.
+   2026-11-15: restored at her ask, with TV Goodness added as a fourth. */
+body.is-daniel .dan__press {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1.3rem;
+  margin: 1.4rem 0 0;
+  font-family: var(--body);
+  font-size: .85rem;
+}
+body.is-daniel .dan__press-label {
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .62;
+}
+body.is-daniel .dan__press a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  opacity: .78;
+  transition: opacity .25s ease;
+}
+body.is-daniel .dan__press a:hover,
+body.is-daniel .dan__press a:focus-visible { opacity: 1; }
 
 /* ==========================================================================
    THE BECOMING, STACKED (2026-10-26). "on mobile, i want the title of inner
