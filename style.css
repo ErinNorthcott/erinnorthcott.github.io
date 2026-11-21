@@ -8287,3 +8287,55 @@ body.is-ceremony .fit .faq__item {
     white-space: normal;
   }
 }
+
+/* HONEYBOOK BOOKING MODAL (2026-11-20): overlay opened by .js-hb-trigger
+   links on Inner Ceremonies (hbmodal.js), replacing the Acuity hand-off.
+   HoneyBook's own iframe fills .hb-modal__body at whatever height it needs;
+   the panel scrolls rather than growing the page. */
+.hb-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vh, 2.5rem) 1rem;
+}
+.hb-modal.is-open { display: flex; }
+.hb-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(61, 51, 43, .55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.hb-modal__panel {
+  position: relative;
+  width: min(100%, 900px);
+  max-height: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.hb-modal__close {
+  position: absolute;
+  top: .25rem;
+  right: .5rem;
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  background: transparent;
+  font-family: var(--body);
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--t-ink-soft);
+  cursor: pointer;
+}
+.hb-modal__close:hover { color: var(--t-ink); }
+.hb-modal__body {
+  overflow-y: auto;
+  padding-top: 2.5rem;
+}
