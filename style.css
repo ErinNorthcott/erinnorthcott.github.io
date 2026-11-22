@@ -8340,3 +8340,27 @@ body.is-ceremony .fit .faq__item {
   overflow-y: auto;
   padding-top: 2.5rem;
 }
+
+/* ==========================================================================
+   FOOTER WORDMARK (2026-11-22, local preview): Natalie's Asset 2.svg
+   (stacked script) in place of the typed name in the footer. Fill is
+   currentColor so it takes the footer name's colour on every page.
+   ========================================================================== */
+.footer__name:has(.footer__wordmark) { line-height: 0; letter-spacing: 0; }
+.footer__wordmark { display: block; width: clamp(9rem, 16vw, 13rem); height: auto; fill: currentColor; }
+
+/* FOOTER, rebalanced (2026-11-22): Follow moves out of the brand block into
+   its own column on the right, beside Explore and More, and the whole footer
+   sits shorter. */
+.footer { padding-top: clamp(2.2rem, 4.5vh, 3.2rem); }
+.footer__inner { grid-template-columns: 2.4fr 1fr 1fr auto; }
+.footer__col--follow .footer__socials { margin-top: .15rem; }
+.footer__base { margin-top: clamp(1.4rem, 2.4vw, 1.8rem); }
+@media (max-width: 720px) {
+  .footer__inner { grid-template-columns: 1fr; }
+}
+/* on the film-strip pages (home, Daniel) the right edge's sprocket marks start
+   at 46px in, so the footer's right-hand content steps clear of them */
+@media (min-width: 721px) {
+  body:has(.filmedge--r) .footer { padding-right: 4rem; }
+}
