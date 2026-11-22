@@ -1340,7 +1340,6 @@ body {
   width: 1.15rem;
   height: 1.15rem;
   color: rgba(255,248,238,.78);
-  cursor: default;                 /* stubbed until the real handles land */
   transition: color .3s var(--ease), transform .3s var(--ease);
 }
 .footer__social svg { width: 100%; height: 100%; fill: currentColor; }
