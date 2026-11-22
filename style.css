@@ -6418,7 +6418,7 @@ body.is-ceremony .temple__snap img {
    means the column itself sets the measure and the lines run the full width
    of the text half. NOTHING MOVES: the grid is still two even columns and
    the photo is still right-aligned at the inner edge of the left one. */
-body.is-ceremony .temple__notetext { max-width: 100%; }
+body.is-ceremony .temple__notetext { max-width: 100%; container-type: inline-size; }
 body.is-ceremony .temple__notetext .temple__label { justify-content: flex-start; }
 body.is-ceremony .temple__noteline {
   margin: 0 0 clamp(1.1rem, 2.2vw, 1.6rem);
@@ -8089,14 +8089,16 @@ body.is-ceremony .note__uncover .temple__lede {
 body.is-ceremony .note__uncover .temple__lede:last-child { margin-bottom: 0; }
 body.is-ceremony .note__uncover .temple__lede em { font-style: italic; color: inherit; }
 
-/* the Jung line, set apart from the paragraphs on either side of it */
+/* the Jung line, set apart from the paragraphs on either side of it. One
+   line always (2026-11-22, "make this all one line") — nowrap + a
+   viewport-fit font-size instead of the ch-capped width that wrapped it. */
 body.is-ceremony .temple__quote--note {
   margin: clamp(1.6rem, 3.4vw, 2.4rem) 0 clamp(1.4rem, 3vw, 2rem);
-  max-width: 44ch;
 }
 body.is-ceremony .temple__quote--note blockquote {
-  font-size: clamp(1.1rem, 1.75vw, 1.4rem);
+  font-size: clamp(.45rem, 3cqi, 1.4rem);   /* sized off .temple__notetext, not the viewport, so it fits whatever the grid gives that column at any breakpoint */
   line-height: 1.32;
+  white-space: nowrap;
 }
 
 /* 2026-10-26: the trust line used to be "I just knew I could trust you." and
