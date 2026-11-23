@@ -8371,9 +8371,15 @@ body.is-ceremony .fit .faq__item {
    headline above already fills the measure on one line, so it stays. */
 @media (max-width: 720px) {
   body.try-instrument .hook__line { font-size: 4.8vw; font-weight: 400; }
-  /* the headline is ~11.7 of its own font-size wide; held inside the measure
-     so it stops running 15px off a 320 screen */
-  body.try-instrument .hook__hand { font-size: min(1.8rem, calc((100vw - 3rem) / 11.8)); }
+  /* the headline goes to two lines on a phone (Natalie, 2026-11-23: "its fine
+     if it has to be two lines"), so it can be set far larger */
+  body.try-instrument .hook__hand {
+    white-space: normal;
+    text-wrap: balance;
+    font-size: min(calc((100vw - 3.5rem) / 6.1), 4.6rem);   /* "Boxes of cassettes" is ~6 of its font-size wide: fills the measure */
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
   body.try-instrument .section--hook .btn-enter { font-size: .95rem; padding: 1.05em 2.6em; }
   body.try-instrument .section--hook .film__cta { margin-top: 1.8rem; }
 }
