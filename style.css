@@ -8347,7 +8347,7 @@ body.is-ceremony .fit .faq__item {
    currentColor so it takes the footer name's colour on every page.
    ========================================================================== */
 .footer__name:has(.footer__wordmark) { line-height: 0; letter-spacing: 0; }
-.footer__wordmark { display: block; width: clamp(9rem, 16vw, 13rem); height: auto; fill: currentColor; }
+.footer__wordmark { display: block; width: clamp(7.75rem, 13.5vw, 11rem); height: auto; fill: currentColor; }
 
 /* FOOTER, rebalanced (2026-11-22): Follow moves out of the brand block into
    its own column on the right, beside Explore and More, and the whole footer
@@ -8363,4 +8363,17 @@ body.is-ceremony .fit .faq__item {
    at 46px in, so the footer's right-hand content steps clear of them */
 @media (min-width: 721px) {
   body:has(.filmedge--r) .footer { padding-right: 4rem; }
+}
+
+/* HOOK on mobile (2026-11-23): "a dying wish that became an HBO film." was
+   11.5px on a 390 phone. Sized off the viewport so it stays one line and runs
+   close to the headline's own width; the Daniel button steps up with it. The
+   headline above already fills the measure on one line, so it stays. */
+@media (max-width: 720px) {
+  body.try-instrument .hook__line { font-size: 4.8vw; font-weight: 400; }
+  /* the headline is ~11.7 of its own font-size wide; held inside the measure
+     so it stops running 15px off a 320 screen */
+  body.try-instrument .hook__hand { font-size: min(1.8rem, calc((100vw - 3rem) / 11.8)); }
+  body.try-instrument .section--hook .btn-enter { font-size: .95rem; padding: 1.05em 2.6em; }
+  body.try-instrument .section--hook .film__cta { margin-top: 1.8rem; }
 }
