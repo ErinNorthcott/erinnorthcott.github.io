@@ -8376,7 +8376,7 @@ body.is-ceremony .fit .faq__item {
   body.try-instrument .hook__hand {
     white-space: normal;
     text-wrap: balance;
-    font-size: min(calc((100vw - 3.5rem) / 6.1), 4.6rem);   /* "Boxes of cassettes" is ~6 of its font-size wide: fills the measure */
+    font-size: min(calc((100vw - 3.5rem) / 7), 4rem);   /* "Boxes of cassettes" is ~6 of its font-size wide; /7 sits a step inside the measure */
     line-height: 1.05;
     margin-bottom: 1.2rem;
   }
