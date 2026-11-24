@@ -9,6 +9,8 @@
   const img = rings && rings.querySelector('img');
   if (!close || !rings || !img) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* phones show the Daniel close instead: the four PNG rings turning (2026-11-23) */
+  if (window.matchMedia('(max-width: 820px)').matches) return;
 
   /* the four rings, as the CSS has them: scale, direction, seconds per turn, opacity */
   const RINGS = [
